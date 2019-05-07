@@ -1,0 +1,5 @@
+threshold: 90
+email: shlomir@xconnect.net
+disks:
+    - \\jlm-pc-shlomi\c$
+    - \\jlm-fs-8\e$

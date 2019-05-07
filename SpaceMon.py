@@ -9,24 +9,26 @@ except ImportError:
     sys.exit(msg % (sys.version, sys.exc_info()[1]))
 
 
-def main(drives):
+def main(disks, threshold, email):
     sendmail = False
-    for drive in drives:
+    for disk in disks:
         try:
-            driveinfo = str(psutil.disk_usage(drive).percent)
-            if not sendmail and float(driveinfo) >= 90:
+            diskinfo = str(psutil.disk_usage(disk).percent)
+            if not sendmail and float(diskinfo) >= float(threshold):
                 sendmail = True
         except FileNotFoundError:
-            driveinfo = "(path not found)"
+            diskinfo = "(path not found)"
         except Exception:
-            driveinfo = "(unknown error)"
+            diskinfo = "(unknown error)"
         finally:
-            print(drive, driveinfo)
+            print(disk, diskinfo)
 
     if sendmail:
         print("\ntoo high values were found")
 
 
 if __name__ == '__main__':
-    main(["\\\\jlm-pc-shlomi\\c$", "\\\\jlm-fs-8\\e$"])
+    with open("SpaceMon.yml", 'r') as ymlfile:
+        cfg = yaml.load(ymlfile)
+    main(cfg['disks'], cfg['threshold'], cfg['email'])
     sys.exit(0)
