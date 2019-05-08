@@ -11,8 +11,8 @@ class TestSpaceMon(unittest.TestCase):
         self.assertEqual(result, expect)
 
     def test_yaml_run(self):
-        result = len(yaml_run("unittest.yml"))
-        expect = 1
+        result = yaml_run("unittest.yml")
+        expect = 0
         self.assertEqual(result, expect)
 
 

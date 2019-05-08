@@ -21,8 +21,13 @@ def main(disks):
             diskinfo = "(unknown error)"
         finally:
             results[disk] = diskinfo
-
     return results
+
+
+def mail_run(results, threshold):
+    print(results)
+    print(threshold)
+    return 0
 
 
 def yaml_run(configfile="SpaceMon.yml"):
@@ -34,7 +39,8 @@ def yaml_run(configfile="SpaceMon.yml"):
     try:
         with open(configfile, 'r') as ymlfile:
             cfg = yaml.load(ymlfile, Loader=yaml.FullLoader)
-        return main(cfg['disks'])
+        return mail_run(main(cfg['disks']), cfg['threshold'])
+        # return main(cfg['disks'])
     except FileNotFoundError:
         if configfile == "-h" or configfile == "--help":
             sys.exit("Usage: %s [config-file]" % (sys.argv[0]))
@@ -55,4 +61,4 @@ if __name__ == '__main__':
         configfile = sys.argv[1]
     else:
         configfile = "SpaceMon.yml"
-    print(yaml_run(configfile))
+    sys.exit(yaml_run(configfile))
