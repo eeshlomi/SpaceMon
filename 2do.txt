@@ -1,7 +1,5 @@
 finish email
-	new functions to be called from yaml_run
-	receives dict (main results) and threshold (config file/parameter)
-	will send alert with the results if threshold was reached.
+
 log history
 	CSV/Nagios performance format?
 	with timestamps
