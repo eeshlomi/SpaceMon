@@ -53,4 +53,10 @@ def yaml_run(configfile="SpaceMon.yml"):
 
 
 if __name__ == '__main__':
-    yaml_run()
+    if len(sys.argv) > 2:
+        configfile = "--help"
+    elif len(sys.argv) == 2:
+        configfile = sys.argv[1]
+    else:
+        configfile = "SpaceMon.yml"
+    yaml_run(configfile)
