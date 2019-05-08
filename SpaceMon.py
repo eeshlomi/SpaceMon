@@ -27,21 +27,26 @@ def main(disks, threshold, mailRecipients):
     if sendmail:
         print("\nsending mail to %s" % mailRecipients)
 
-def yaml_run():
+
+def yaml_run(configfile="SpaceMon.yml"):
     try:
         import yaml
     except ImportError:
         msg = "\nPython %s\n\nModule import error:\n%s\n"
         sys.exit(msg % (sys.version, sys.exc_info()[1]))
-    configfile = "SpaceMon.yml"
     try:
         with open(configfile, 'r') as ymlfile:
             cfg = yaml.load(ymlfile, Loader=yaml.FullLoader)
         main(cfg['disks'], cfg['threshold'], cfg['mailRecipients'])
         return 0
     except FileNotFoundError:
-        msg = "\n%s not found\n"
-        sys.exit(msg % (configfile))
+        if configfile == "-h" or configfile == "--help":
+            sys.exit("Usage: %s [config-file]" % (sys.argv[0]))
+        elif configfile[:1] == "-":
+            sys.exit("unknown argument")
+        else:
+            msg = "\n%s not found\n"
+            sys.exit(msg % (configfile))
     except KeyError:
         msg = "\nThe key %s is missing in %s\n"
         sys.exit(msg % (sys.exc_info()[1], configfile))
