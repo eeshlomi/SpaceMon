@@ -1,0 +1,2 @@
+log history (CSV/Nagios performance format?)
+finish email
