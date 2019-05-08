@@ -15,26 +15,31 @@ def main(disks):
         try:
             diskinfo = psutil.disk_usage(disk).percent
         except OSError:  # FileNotFoundError
-            print(disk, "path not found")
+            disk += "_path_not_found"
             diskinfo = -1
         except Exception:
             # print(traceback.format_exc())
-            print(disk, "unknown error")
+            disk += "_unknown_error"
             diskinfo = -1
         finally:
             results[disk] = diskinfo
     return results
 
 
-def mailer():
-    print("should send mail")
+def mailer(msg, results):
+    print(msg)
+    print(results)
     return 0
 
 
 def mail_run(results, threshold):
-    maxval = max([value for key, value in results.items()])
+    values = [value for key, value in results.items()]
+    maxval = max(values)
+    minval = min(values)
     if maxval >= threshold:
-        return mailer()
+        return mailer("disk usage alert", results)
+    elif minval == -1:
+        return mailer("could not acccess some disks", results)
     else:
         return 0
 
