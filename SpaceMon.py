@@ -8,11 +8,11 @@ except ImportError:
     sys.exit(msg % (sys.version, sys.exc_info()[1]))
 
 
-def main(disks, threshold, email):
+def main(disks, threshold, mailRecipients):
     sendmail = False
     for disk in disks:
         try:
-            diskinfo = str(psutil.disk_usage(disk).percent)
+            diskinfo = psutil.disk_usage(disk).percent
             if not sendmail and float(diskinfo) >= float(threshold):
                 sendmail = True
         except FileNotFoundError:
@@ -23,7 +23,7 @@ def main(disks, threshold, email):
             print(disk, diskinfo)
 
     if sendmail:
-        print("\ntoo high values were found")
+        print("\nsending mail to %s" % mailRecipients)
 
 
 if __name__ == '__main__':
@@ -35,8 +35,11 @@ if __name__ == '__main__':
     configfile = "SpaceMon.yml"
     try:
         with open(configfile, 'r') as ymlfile:
-            cfg = yaml.load(ymlfile)
-        main(cfg['disks'], cfg['threshold'], cfg['email'])
+            cfg = yaml.load(ymlfile, Loader=yaml.FullLoader)
+        main(cfg['disks'], cfg['threshold'], cfg['mailRecipients'])
         sys.exit(0)
     except FileNotFoundError:
         sys.exit(configfile+" not found")
+    except KeyError:
+        msg = "\nThe key %s is missing in %s\n"
+        sys.exit(msg % (sys.exc_info()[1], configfile))
