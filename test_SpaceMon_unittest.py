@@ -1,17 +1,17 @@
 #!/usr/bin/python
 
 import unittest
-from SpaceMon import main, yaml_run
+from SpaceMon import spacemon, main
 
 
 class TestSpaceMon(unittest.TestCase):
-    def test_main(self):
-        result = len(main(["."]))
+    def test_spacemon(self):
+        result = len(spacemon(["."]))
         expect = 1
         self.assertEqual(result, expect)
 
-    def test_yaml_run(self):
-        result = yaml_run("unittest.yml")
+    def test_main(self):
+        result = main("unittest.yml")
         expect = 0
         self.assertEqual(result, expect)
 

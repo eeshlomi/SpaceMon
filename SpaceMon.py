@@ -9,7 +9,7 @@ except ImportError:
     sys.exit(msg % (sys.version, sys.exc_info()[1]))
 
 
-def main(disks):
+def spacemon(disks):
     results = {}
     for disk in disks:
         try:
@@ -44,7 +44,7 @@ def mail_run(results, threshold):
         return 0
 
 
-def yaml_run(configfile="SpaceMon.yml"):
+def main(configfile="SpaceMon.yml"):
     try:
         import yaml
     except ImportError:
@@ -53,7 +53,7 @@ def yaml_run(configfile="SpaceMon.yml"):
     try:
         with open(configfile, 'r') as ymlfile:
             cfg = yaml.load(ymlfile, Loader=yaml.FullLoader)
-        return mail_run(main(cfg['disks']), cfg['threshold'])
+        return mail_run(spacemon(cfg['disks']), cfg['threshold'])
     except IOError:  # FileNotFoundError
         if configfile == "-h" or configfile == "--help":
             sys.exit("Usage: %s [config-file]" % (sys.argv[0]))
@@ -74,4 +74,4 @@ if __name__ == '__main__':
         configfile = sys.argv[1]
     else:
         configfile = "SpaceMon.yml"
-    sys.exit(yaml_run(configfile))
+    sys.exit(main(configfile))
