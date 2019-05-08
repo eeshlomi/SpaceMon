@@ -15,7 +15,7 @@ def main(disks, threshold):
         try:
             diskinfo = psutil.disk_usage(disk).percent
             # if not sendmail and float(diskinfo) >= float(threshold):
-                # sendmail = True
+            #     sendmail = True
         except FileNotFoundError:
             diskinfo = "(path not found)"
         except Exception:
