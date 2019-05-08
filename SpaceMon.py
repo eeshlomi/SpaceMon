@@ -15,10 +15,12 @@ def main(disks):
         try:
             diskinfo = psutil.disk_usage(disk).percent
         except FileNotFoundError:
-            diskinfo = "(path not found)"
+            print(disk, "path not found")
+            diskinfo = -1
         except Exception:
             # print(traceback.format_exc())
-            diskinfo = "(unknown error)"
+            print(disk, "unknown error")
+            diskinfo = -1
         finally:
             results[disk] = diskinfo
     return results
@@ -40,7 +42,6 @@ def yaml_run(configfile="SpaceMon.yml"):
         with open(configfile, 'r') as ymlfile:
             cfg = yaml.load(ymlfile, Loader=yaml.FullLoader)
         return mail_run(main(cfg['disks']), cfg['threshold'])
-        # return main(cfg['disks'])
     except FileNotFoundError:
         if configfile == "-h" or configfile == "--help":
             sys.exit("Usage: %s [config-file]" % (sys.argv[0]))

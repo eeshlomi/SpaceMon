@@ -6,7 +6,7 @@ from SpaceMon import main, yaml_run
 
 class TestSpaceMon(unittest.TestCase):
     def test_main(self):
-        result = len(main(["recipient@domain.com"]))
+        result = len(main(["."]))
         expect = 1
         self.assertEqual(result, expect)
 
