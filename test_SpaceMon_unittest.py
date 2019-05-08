@@ -6,13 +6,13 @@ from SpaceMon import main, yaml_run
 
 class TestSpaceMon(unittest.TestCase):
     def test_main(self):
-        result = main(["recipient@domain.com"], 0, ["."])
-        expect = 0
+        result = len(main(["recipient@domain.com"], 0))
+        expect = 1
         self.assertEqual(result, expect)
 
     def test_yaml_run(self):
-        result = yaml_run("unittest.yml")
-        expect = 0
+        result = len(yaml_run("unittest.yml"))
+        expect = 1
         self.assertEqual(result, expect)
 
 

@@ -9,25 +9,25 @@ except ImportError:
     sys.exit(msg % (sys.version, sys.exc_info()[1]))
 
 
-def main(disks, threshold, mailRecipients):
-    sendmail = False
+def main(disks, threshold):
+    results = {}
     for disk in disks:
         try:
             diskinfo = psutil.disk_usage(disk).percent
-            if not sendmail and float(diskinfo) >= float(threshold):
-                sendmail = True
+            # if not sendmail and float(diskinfo) >= float(threshold):
+                # sendmail = True
         except FileNotFoundError:
             diskinfo = "(path not found)"
         except Exception:
             # print(traceback.format_exc())
             diskinfo = "(unknown error)"
         finally:
-            print(disk, diskinfo)
+            results[disk] = diskinfo
 
-    if sendmail:
-        print("\nsending mail to %s" % mailRecipients)
+    # if sendmail:
+    #     print("should invoke mail function")
 
-    return 0
+    return results
 
 
 def yaml_run(configfile="SpaceMon.yml"):
@@ -39,8 +39,7 @@ def yaml_run(configfile="SpaceMon.yml"):
     try:
         with open(configfile, 'r') as ymlfile:
             cfg = yaml.load(ymlfile, Loader=yaml.FullLoader)
-        main(cfg['disks'], cfg['threshold'], cfg['mailRecipients'])
-        return 0
+        return main(cfg['disks'], cfg['threshold'])
     except FileNotFoundError:
         if configfile == "-h" or configfile == "--help":
             sys.exit("Usage: %s [config-file]" % (sys.argv[0]))
@@ -61,4 +60,4 @@ if __name__ == '__main__':
         configfile = sys.argv[1]
     else:
         configfile = "SpaceMon.yml"
-    yaml_run(configfile)
+    print(yaml_run(configfile))
