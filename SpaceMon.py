@@ -30,12 +30,14 @@ def mailer():
     print("should send mail")
     return 0
 
+
 def mail_run(results, threshold):
     maxval = max([value for key, value in results.items()])
     if maxval >= threshold:
         return mailer()
     else:
         return 0
+
 
 def yaml_run(configfile="SpaceMon.yml"):
     try:
