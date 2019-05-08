@@ -10,7 +10,6 @@ class TestSpaceMon(unittest.TestCase):
         expect = 0
         self.assertEqual(result, expect)
 
-
     def test_yaml_run(self):
         result = yaml_run("unittest.yml")
         expect = 0
