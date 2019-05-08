@@ -27,6 +27,8 @@ def main(disks, threshold, mailRecipients):
     if sendmail:
         print("\nsending mail to %s" % mailRecipients)
 
+    return 0
+
 
 def yaml_run(configfile="SpaceMon.yml"):
     try:
