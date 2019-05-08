@@ -3,7 +3,7 @@
 import sys
 try:
     import psutil
-    #import traceback
+    # import traceback
 except ImportError:
     msg = "\nPython %s\n\nModule import error:\n%s\n"
     sys.exit(msg % (sys.version, sys.exc_info()[1]))
@@ -19,7 +19,7 @@ def main(disks, threshold, mailRecipients):
         except FileNotFoundError:
             diskinfo = "(path not found)"
         except Exception:
-            #print(traceback.format_exc())
+            # print(traceback.format_exc())
             diskinfo = "(unknown error)"
         finally:
             print(disk, diskinfo)
