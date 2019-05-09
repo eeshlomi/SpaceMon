@@ -4,4 +4,7 @@ log history
 	CSV/Nagios performance format?
 	with timestamps
 	include traceback errors?
-SpaceMon: Arrange main() and other functions. sys.exc_info() on unknown exception. Test yml/disk bad-path and yml bad format/setting (CircleCI/Ubuntu/Windows, tests and logs article). Anything needed in CalculatorLibrsry? Make WenCrawler private
+Misc
+	Arrange main() and other functions
+	sys.exc_info() on unknown exception
+	Test yml/disk bad-path and yml bad format/setting (CircleCI/Ubuntu/Windows, tests and logs article)
