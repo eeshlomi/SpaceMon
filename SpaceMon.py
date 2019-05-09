@@ -10,7 +10,7 @@ except ImportError:
 
 
 def spacemon(disks):
-    results = {}
+    stats = {}
     for disk in disks:
         try:
             diskinfo = psutil.disk_usage(disk).percent
@@ -22,29 +22,37 @@ def spacemon(disks):
             disk += "_unknown_error"
             diskinfo = -1
         finally:
-            results[disk] = diskinfo
-    return results
+            stats[disk] = diskinfo
+    return stats
 
 
-def mailer(msg, results):
+def mailer(msg, stats):
     print(msg)
-    print(results)
+    print(stats)
     return 0
 
 
-def mail_run(results, threshold):
-    values = [value for key, value in results.items()]
+def mailMsg(stats, threshold):
+    values = [value for key, value in stats.items()]
     maxval = max(values)
     minval = min(values)
     if maxval >= threshold:
-        return mailer("disk usage alert", results)
+        return "disk usage alert"
     elif minval == -1:
-        return mailer("could not acccess some disks", results)
+        return "could not acccess some disks"
     else:
         return 0
 
 
-def main(configfile="SpaceMon.yml"):
+def main(cfg):
+    stats = spacemon(cfg['disks'])
+    msg = mailMsg(stats, cfg['threshold'])
+    if msg:
+        print(msg)  # call mailer
+    return 0
+
+
+def parseYml(configfile="SpaceMon.yml"):
     try:
         import yaml
     except ImportError:
@@ -53,7 +61,7 @@ def main(configfile="SpaceMon.yml"):
     try:
         with open(configfile, 'r') as ymlfile:
             cfg = yaml.load(ymlfile, Loader=yaml.FullLoader)
-        return mail_run(spacemon(cfg['disks']), cfg['threshold'])
+        return main(cfg)
     except IOError:  # FileNotFoundError
         if configfile == "-h" or configfile == "--help":
             sys.exit("Usage: %s [config-file]" % (sys.argv[0]))
@@ -74,4 +82,4 @@ if __name__ == '__main__':
         configfile = sys.argv[1]
     else:
         configfile = "SpaceMon.yml"
-    sys.exit(main(configfile))
+    sys.exit(parseYml(configfile))

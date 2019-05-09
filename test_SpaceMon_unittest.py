@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import unittest
-from SpaceMon import spacemon, main
+from SpaceMon import spacemon, parseYml
 
 
 class TestSpaceMon(unittest.TestCase):
@@ -10,8 +10,8 @@ class TestSpaceMon(unittest.TestCase):
         expect = 1
         self.assertEqual(result, expect)
 
-    def test_main(self):
-        result = main("unittest.yml")
+    def test_parseYml(self):
+        result = parseYml("unittest.yml")
         expect = 0
         self.assertEqual(result, expect)
 
