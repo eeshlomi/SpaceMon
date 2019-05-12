@@ -43,7 +43,6 @@ def mailMsg(stats, threshold=90):
 def main(cfg):
     stats = spacemon(cfg['disks'])
     msg = mailMsg(stats, cfg['threshold'])
-    print(stats)  # DEBUG
     if msg:
         print(msg)  # call mailer
     return 0

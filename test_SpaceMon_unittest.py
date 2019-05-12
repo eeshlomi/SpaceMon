@@ -5,23 +5,23 @@ from SpaceMon import spacemon, mailMsg, parseYml
 
 
 class TestMailMsg(unittest.TestCase):
-    def mailMsg(self):
+    def test_mailMsg(self):
         result = mailMsg({'somepath': 89})
         equals = 0
         self.assertEqual(result, equals)
 
-    def mailMsg_disk_alert(self):
+    def test_mailMsg_disk_alert(self):
         result = mailMsg({'somepath': 89}, 80)
         equals = 'disk usage alert'
         self.assertEqual(result, equals)
 
-    def mailMsg_nopath(self):
+    def test_mailMsg_nopath(self):
         result = mailMsg({'nopath': -1})
         equals = 'could not access some disks'
         self.assertEqual(result, equals)
 
 
-class TestYml(unittest.TestCase):
+class TestParseYml(unittest.TestCase):
     def test_parseYml(self):
         result = parseYml('unittest.yml')
         equals = 0
