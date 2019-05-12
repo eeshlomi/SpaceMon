@@ -3,7 +3,6 @@
 import sys
 try:
     import psutil
-    # import traceback
 except ImportError:
     msg = '\nPython %s\n\nModule import error:\n%s\n'
     sys.exit(msg % (sys.version, sys.exc_info()[1]))
@@ -18,7 +17,7 @@ def spacemon(disks=['.']):
             disk += '_path_not_found'
             diskinfo = -1
         except Exception:
-            # print(traceback.format_exc())
+            print(sys.exc_info()[1])  # This should go the log
             disk += '_unknown_error'
             diskinfo = -1
         finally:
