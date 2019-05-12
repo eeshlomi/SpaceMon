@@ -68,8 +68,8 @@ def parseYml(configfile='SpaceMon.yml'):
             return 'unknown argument'
         else:
             return 'config/log file access error'
-    except yaml.scanner.ScannerError:
-        msg = '%s has no valid yml format'
+    except (TypeError, yaml.scanner.ScannerError):
+        msg = '%s is not a valid yml file'
         return msg % (configfile)
     except KeyError:
         msg = 'The key %s is missing in %s'

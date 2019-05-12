@@ -1,4 +1,1 @@
-log history
-	CSV/Nagios performance format?
-	with timestamps
 finish email

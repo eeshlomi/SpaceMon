@@ -40,7 +40,7 @@ class TestSpaceMon(unittest.TestCase):
     def test_parseYml_bad_yml(self):
         # Test bad format:
         result = parseYml('2do.txt')
-        equals = '2do.txt has no valid yml format'
+        equals = '2do.txt is not a valid yml file'
         self.assertEqual(result, equals)
 
     def test_parseYml_key_error(self):
@@ -55,7 +55,7 @@ class TestSpaceMon(unittest.TestCase):
         equals = 'Usage: SpaceMon.py [config-file]'
         self.assertEqual(result, equals)
 
-    def test_parseYml_unknown_arg(self):
+    def test_parseYml_noarg(self):
         # Test unknown argunemt:
         result = parseYml('--unknown-argument')
         equals = 'unknown argument'
@@ -66,14 +66,14 @@ class TestSpaceMon(unittest.TestCase):
         equals = 0
         self.assertEqual(result, equals)
 
-    def test_mailMsg_disk_alert(self):
-        result = mailMsg({'somepath': 89}, 80)
-        equals = 'disk usage alert'
-        self.assertEqual(result, equals)
-
     def test_mailMsg_nopath(self):
         result = mailMsg({'nopath': -1})
         equals = 'could not access some disks'
+        self.assertEqual(result, equals)
+
+    def test_mailMsg_disk_alert(self):
+        result = mailMsg({'somepath': 89}, 80)
+        equals = 'disk usage alert'
         self.assertEqual(result, equals)
 
 
