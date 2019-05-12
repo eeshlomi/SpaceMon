@@ -1,12 +1,8 @@
-finish email
-
 log history
 	CSV/Nagios performance format?
 	with timestamps
-	include traceback errors?
-Misc
-	Arrange main() and other functions
-	sys.exc_info() on unknown exception
+	include unknown errors [change it to sys.exc_info()]
 Tests
 	yml/disk bad-path and yml bad format/setting (CircleCI/Ubuntu/Windows)
 	enhance unit tests for more accurate results
+finish email

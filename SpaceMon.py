@@ -27,8 +27,6 @@ def spacemon(disks=['.']):
 
 
 def mailer(msg, stats):
-    print(msg)
-    print(stats)
     return 0
 
 
