@@ -1,0 +1,4 @@
+mailRecipients:
+    - recipient@domain.com
+disks:
+    - .

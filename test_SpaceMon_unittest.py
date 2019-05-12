@@ -39,6 +39,12 @@ class TestParseYml(unittest.TestCase):
         equals = '2do.txt has no valid yml format'
         self.assertEqual(result, equals)
 
+    def test_parseYml_key_error(self):
+        # Test KeyError:
+        result = parseYml('unittest_missingKey.yml')
+        equals = "The key 'threshold' is missing in unittest_missingKey.yml"
+        self.assertEqual(result, equals)
+
     def test_parseYml_help(self):
         # Test --help:
         result = parseYml('--help')
