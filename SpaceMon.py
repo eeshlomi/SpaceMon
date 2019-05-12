@@ -32,6 +32,9 @@ def mailMsg(stats, threshold=90):
 
 
 def mailer(msg, stats):
+    # import smtplib
+    # server=smtplib.SMTP("208.76.16.80", 25)
+    # server.sendmail("test@xconnect.net", "shlomir@xconnect.net","msg-body")
     return 0
 
 
