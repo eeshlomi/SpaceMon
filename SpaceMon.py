@@ -30,12 +30,12 @@ def mailer(msg, stats):
     return 0
 
 
-def mailMsg(stats, threshold):
+def mailMsg(stats, threshold=90):
     values = [value for key, value in stats.items()]
     if max(values) >= threshold:
         return 'disk usage alert'
     elif min(values) == -1:
-        return 'could not acccess some disks'
+        return 'could not access some disks'
     else:
         return 0
 

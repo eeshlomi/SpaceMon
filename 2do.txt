@@ -2,6 +2,6 @@ log history
 	CSV/Nagios performance format?
 	with timestamps
 	include unknown errors [change it to sys.exc_info()]
-Tests [CircleCI/Linux/Windows]
-	increase coverage [bad yml file given]
+Tests
+	class TestMailMsg is not processed !?
 finish email
