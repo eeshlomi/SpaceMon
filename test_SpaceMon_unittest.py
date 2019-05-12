@@ -1,23 +1,21 @@
 #!/usr/bin/python
 
 import unittest
-from SpaceMon import spacemon, mailMsg, parseYml
+from SpaceMon import spacemon, parseYml, mailMsg
 
 
-class TestMailMsg(unittest.TestCase):
-    def test_mailMsg(self):
-        result = mailMsg({'somepath': 89})
-        equals = 0
-        self.assertEqual(result, equals)
+class TestSpaceMon(unittest.TestCase):
+    def test_spacemon(self):
+        ''' Test that spacemon default, which is '.',
+            returns higher than 0 free space: '''
+        result = spacemon()['.']
+        greaterThan = 0
+        self.assertGreater(result, greaterThan)
 
-    def test_mailMsg_disk_alert(self):
-        result = mailMsg({'somepath': 89}, 80)
-        equals = 'disk usage alert'
-        self.assertEqual(result, equals)
-
-    def test_mailMsg_nopath(self):
-        result = mailMsg({'nopath': -1})
-        equals = 'could not access some disks'
+    def test_spacemon_nopath(self):
+        # Test OSError exception:
+        result = spacemon(['nopath'])['nopath_path_not_found']
+        equals = -1
         self.assertEqual(result, equals)
 
 
@@ -58,18 +56,20 @@ class TestParseYml(unittest.TestCase):
         self.assertEqual(result, equals)
 
 
-class TestSpaceMon(unittest.TestCase):
-    def test_spacemon(self):
-        ''' Test that spacemon default, which is '.',
-            returns higher than 0 free space: '''
-        result = spacemon()['.']
-        greaterThan = 0
-        self.assertGreater(result, greaterThan)
+class TestMailMsg(unittest.TestCase):
+    def test_mailMsg(self):
+        result = mailMsg({'somepath': 89})
+        equals = 0
+        self.assertEqual(result, equals)
 
-    def test_spacemon_nopath(self):
-        # Test OSError exception:
-        result = spacemon(['nopath'])['nopath_path_not_found']
-        equals = -1
+    def test_mailMsg_disk_alert(self):
+        result = mailMsg({'somepath': 89}, 80)
+        equals = 'disk usage alert'
+        self.assertEqual(result, equals)
+
+    def test_mailMsg_nopath(self):
+        result = mailMsg({'nopath': -1})
+        equals = 'could not access some disks'
         self.assertEqual(result, equals)
 
 
