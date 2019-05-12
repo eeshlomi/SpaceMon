@@ -6,19 +6,19 @@ from SpaceMon import spacemon, parseYml
 
 class TestSpaceMon(unittest.TestCase):
     def test_spacemon(self):
-        result = len(spacemon())
-        expect = 1
-        self.assertEqual(result, expect)
+        result = spacemon()['.']
+        greaterThan = 0
+        self.assertGreater(result, greaterThan)
 
     def test_spacemon_nopath(self):
-        result = len(spacemon(['nopath']))
-        expect = 1
-        self.assertEqual(result, expect)
+        result = spacemon(['nopath'])['nopath_path_not_found']
+        equals = -1
+        self.assertEqual(result, equals)
 
     def test_parseYml(self):
         result = parseYml("unittest.yml")
-        expect = 0
-        self.assertEqual(result, expect)
+        equals = 0
+        self.assertEqual(result, equals)
 
 
 if __name__ == '__main__':
