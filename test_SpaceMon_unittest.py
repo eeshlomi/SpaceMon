@@ -6,7 +6,12 @@ from SpaceMon import spacemon, parseYml
 
 class TestSpaceMon(unittest.TestCase):
     def test_spacemon(self):
-        result = len(spacemon(["."]))
+        result = len(spacemon())
+        expect = 1
+        self.assertEqual(result, expect)
+
+    def test_spacemon_nopath(self):
+        result = len(spacemon(['nopath']))
         expect = 1
         self.assertEqual(result, expect)
 

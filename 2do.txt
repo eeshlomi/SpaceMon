@@ -7,4 +7,6 @@ log history
 Misc
 	Arrange main() and other functions
 	sys.exc_info() on unknown exception
-	Test yml/disk bad-path and yml bad format/setting (CircleCI/Ubuntu/Windows, tests and logs article)
+Tests
+	yml/disk bad-path and yml bad format/setting (CircleCI/Ubuntu/Windows)
+	enhance unit tests for more accurate results

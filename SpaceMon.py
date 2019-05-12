@@ -9,7 +9,7 @@ except ImportError:
     sys.exit(msg % (sys.version, sys.exc_info()[1]))
 
 
-def spacemon(disks):
+def spacemon(disks=['.']):
     stats = {}
     for disk in disks:
         try:
@@ -34,11 +34,9 @@ def mailer(msg, stats):
 
 def mailMsg(stats, threshold):
     values = [value for key, value in stats.items()]
-    maxval = max(values)
-    minval = min(values)
-    if maxval >= threshold:
+    if max(values) >= threshold:
         return "disk usage alert"
-    elif minval == -1:
+    elif min(values) == -1:
         return "could not acccess some disks"
     else:
         return 0
@@ -47,6 +45,7 @@ def mailMsg(stats, threshold):
 def main(cfg):
     stats = spacemon(cfg['disks'])
     msg = mailMsg(stats, cfg['threshold'])
+    print(stats)  # DEBUG
     if msg:
         print(msg)  # call mailer
     return 0
