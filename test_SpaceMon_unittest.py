@@ -29,10 +29,22 @@ class TestSpaceMon(unittest.TestCase):
         equals = 'nopath.yml not found'
         self.assertEqual(result, equals)
 
+    def test_parseYml_bad_yml(self):
+        # Test bad format:
+        result = parseYml('2do.txt')
+        equals = '2do.txt has no valid yml format'
+        self.assertEqual(result, equals)
+
     def test_parseYml_help(self):
-        # Test -h:
-        result = parseYml('-h')
+        # Test --help:
+        result = parseYml('--help')
         equals = 'Usage: SpaceMon.py [config-file]'
+        self.assertEqual(result, equals)
+
+    def test_parseYml_unknown_arg(self):
+        # Test unknown argunemt:
+        result = parseYml('--unknown-argument')
+        equals = 'unknown argument'
         self.assertEqual(result, equals)
 
 
