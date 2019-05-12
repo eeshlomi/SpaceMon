@@ -17,16 +17,12 @@ def spacemon(disks=['.']):
             disk += '_path_not_found'
             diskinfo = -1
         except Exception:
-            print(sys.exc_info()[1])  # This should go the log
+            print(sys.exc_info()[1])  # This should go to the log
             disk += '_unknown_error'
             diskinfo = -1
         finally:
             stats[disk] = diskinfo
     return stats
-
-
-def mailer(msg, stats):
-    return 0
 
 
 def mailMsg(stats, threshold=90):
@@ -39,11 +35,16 @@ def mailMsg(stats, threshold=90):
         return 0
 
 
+def mailer(msg, stats):
+    return 0
+
+
 def main(cfg):
     stats = spacemon(cfg['disks'])
     msg = mailMsg(stats, cfg['threshold'])
     if msg:
         print(msg)  # call mailer
+    # Add to the log
     return 0
 
 
