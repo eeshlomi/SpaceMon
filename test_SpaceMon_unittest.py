@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import unittest
-from SpaceMon import spacemon, parseYml, mailMsg
+from SpaceMon import spacemon, main, parseYml, mailMsg
 
 
 class TestSpaceMon(unittest.TestCase):
@@ -18,8 +18,14 @@ class TestSpaceMon(unittest.TestCase):
         equals = -1
         self.assertEqual(result, equals)
 
+    def test_main(self):
+        result = main({'threshold': 0,
+                       'logfile': '',
+                       'disks': ['.'],
+                       'mailRecipients': ['']})
+        equals = 0
+        self.assertEqual(result, equals)
 
-class TestParseYml(unittest.TestCase):
     def test_parseYml(self):
         result = parseYml('unittest.yml')
         equals = 0
@@ -28,7 +34,7 @@ class TestParseYml(unittest.TestCase):
     def test_parseYml_nopath(self):
         # Test IOError exception:
         result = parseYml('nopath.yml')
-        equals = 'nopath.yml not found'
+        equals = 'config/log file access error'
         self.assertEqual(result, equals)
 
     def test_parseYml_bad_yml(self):
@@ -55,8 +61,6 @@ class TestParseYml(unittest.TestCase):
         equals = 'unknown argument'
         self.assertEqual(result, equals)
 
-
-class TestMailMsg(unittest.TestCase):
     def test_mailMsg(self):
         result = mailMsg({'somepath': 89})
         equals = 0

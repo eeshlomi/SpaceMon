@@ -1,6 +1,7 @@
 threshold: 90
-mailRecipients:
-    - shlomir@xconnect.net
+logfile: \\jlm-pc-shlomi\c$\tempnotexist\SpaceMon.log
 disks:
     - \\jlm-pc-shlomi\c$
     - \\jlm-fs-8\e$
+mailRecipients:
+    - shlomir@xconnect.net

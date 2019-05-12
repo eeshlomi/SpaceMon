@@ -1,4 +1,5 @@
 threshold: 0
+logfile: Null
 mailRecipients:
     - recipient@domain.com
 disks:

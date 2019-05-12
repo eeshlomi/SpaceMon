@@ -1,11 +1,7 @@
 #!/usr/bin/python
 
 import sys
-try:
-    import psutil
-except ImportError:
-    msg = '\nPython %s\n\nModule import error:\n%s\n'
-    sys.exit(msg % (sys.version, sys.exc_info()[1]))
+import psutil
 
 
 def spacemon(disks=['.']):
@@ -40,20 +36,24 @@ def mailer(msg, stats):
 
 
 def main(cfg):
+    import logging
+    logging.basicConfig(filename=cfg['logfile'],
+                        filemode='a',
+                        level=logging.INFO,
+                        format='%(asctime)s - %(levelname)s - %(message)s',
+                        datefmt='%b-%d-%y %H:%M:%S')
     stats = spacemon(cfg['disks'])
     msg = mailMsg(stats, cfg['threshold'])
     if msg:
-        print(msg)  # call mailer
-    # Add to the log
+        logging.warning(stats)
+        mailer(msg, stats)
+    else:
+        logging.info(stats)
     return 0
 
 
 def parseYml(configfile='SpaceMon.yml'):
-    try:
-        import yaml
-    except ImportError:
-        msg = '\nPython %s\n\nModule import error:\n%s\n'
-        sys.exit(msg % (sys.version, sys.exc_info()[1]))
+    import yaml
     try:
         with open(configfile, 'r') as ymlfile:
             cfg = yaml.load(ymlfile, Loader=yaml.FullLoader)
@@ -64,7 +64,7 @@ def parseYml(configfile='SpaceMon.yml'):
         elif configfile[:1] == '-':
             return 'unknown argument'
         else:
-            return '%s not found' % (configfile)
+            return 'config/log file access error'
     except yaml.scanner.ScannerError:
         msg = '%s has no valid yml format'
         return msg % (configfile)
