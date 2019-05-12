@@ -31,7 +31,8 @@ def mailMsg(stats, threshold=90):
         return 0
 
 
-def mailer(msg, stats):
+def mailer(msg, stats, mail):
+    print(mail)  # debug
     # import smtplib
     # server=smtplib.SMTP("208.76.16.80", 25)
     # server.sendmail("test@xconnect.net", "shlomir@xconnect.net","msg-body")
@@ -49,7 +50,7 @@ def main(cfg):
     msg = mailMsg(stats, cfg['threshold'])
     if msg:
         logging.warning(stats)
-        mailer(msg, stats)
+        mailer(msg, stats, cfg['mail'])
     else:
         logging.info(stats)
     return 0

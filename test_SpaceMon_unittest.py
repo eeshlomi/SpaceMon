@@ -22,7 +22,7 @@ class TestSpaceMon(unittest.TestCase):
         result = main({'threshold': 0,
                        'logfile': '',
                        'disks': ['.'],
-                       'mailRecipients': ['']})
+                       'mail': ['']})
         equals = 0
         self.assertEqual(result, equals)
 

@@ -1,6 +1,9 @@
 threshold: 0
 logfile: Null
-mailRecipients:
-    - recipient@domain.com
+mail:
+    server: 208.76.16.80
+    sender: sender@domain.com
+    Recipients:
+        - recipient@domain.com
 disks:
     - .

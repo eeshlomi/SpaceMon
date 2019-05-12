@@ -3,5 +3,6 @@ logfile: \\jlm-pc-shlomi\c$\tempnotexist\SpaceMon.log
 disks:
     - \\jlm-pc-shlomi\c$
     - \\jlm-fs-8\e$
-mailRecipients:
-    - shlomir@xconnect.net
+mail:
+    Recipients:
+        - shlomir@xconnect.net
