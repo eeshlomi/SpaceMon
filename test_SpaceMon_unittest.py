@@ -6,18 +6,33 @@ from SpaceMon import spacemon, parseYml
 
 class TestSpaceMon(unittest.TestCase):
     def test_spacemon(self):
+        ''' Test that spacemon default, which is '.',
+            returns higher than 0 free space: '''
         result = spacemon()['.']
         greaterThan = 0
         self.assertGreater(result, greaterThan)
 
     def test_spacemon_nopath(self):
+        # Test OSError exception:
         result = spacemon(['nopath'])['nopath_path_not_found']
         equals = -1
         self.assertEqual(result, equals)
 
     def test_parseYml(self):
-        result = parseYml("unittest.yml")
+        result = parseYml('unittest.yml')
         equals = 0
+        self.assertEqual(result, equals)
+
+    def test_parseYml_nopath(self):
+        # Test IOError exception:
+        result = parseYml('nopath.yml')
+        equals = 'nopath.yml not found'
+        self.assertEqual(result, equals)
+
+    def test_parseYml_help(self):
+        # Test -h:
+        result = parseYml('-h')
+        equals = 'Usage: SpaceMon.py [config-file]'
         self.assertEqual(result, equals)
 
 

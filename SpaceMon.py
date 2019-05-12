@@ -61,15 +61,14 @@ def parseYml(configfile="SpaceMon.yml"):
         return main(cfg)
     except IOError:  # FileNotFoundError
         if configfile == "-h" or configfile == "--help":
-            sys.exit("Usage: %s [config-file]" % (sys.argv[0]))
+            return 'Usage: SpaceMon.py [config-file]'
         elif configfile[:1] == "-":
-            sys.exit("unknown argument")
+            return 'unknown argument'
         else:
-            msg = "\n%s not found\n"
-            sys.exit(msg % (configfile))
+            return '%s not found' % (configfile)
     except KeyError:
-        msg = "\nThe key %s is missing in %s\n"
-        sys.exit(msg % (sys.exc_info()[1], configfile))
+        msg = "The key %s is missing in %s"
+        return msg % (sys.exc_info()[1], configfile)
 
 
 if __name__ == '__main__':
