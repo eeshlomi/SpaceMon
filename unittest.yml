@@ -1,5 +1,5 @@
 threshold: 0
-logfile: ./test.log
+logfile: Null
 mail:
     server: 208.76.16.80
     sender: sender@domain.com

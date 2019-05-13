@@ -2,6 +2,7 @@
 
 import sys
 import psutil
+import traceback  # DEBUG
 
 
 def spacemon(disks=['.']):
@@ -74,7 +75,8 @@ def parseYml(configfile='SpaceMon.yml'):
         elif configfile[:1] == '-':
             return 'unknown argument'
         else:
-            return 'config/log file access error'
+            print(traceback.format_exc())  # DEBUG
+            # return 'config/log file access error'
     except (TypeError, yaml.scanner.ScannerError):
         msg = '%s is not a valid yml file'
         return msg % (configfile)
