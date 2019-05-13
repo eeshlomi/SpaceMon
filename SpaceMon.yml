@@ -1,8 +1,11 @@
-threshold: 90
-logfile: \\jlm-pc-shlomi\c$\tempnotexist\SpaceMon.log
+threshold: 10
+logfile: \\jlm-pc-shlomi\c$\temp\SpaceMon.log
 disks:
     - \\jlm-pc-shlomi\c$
     - \\jlm-fs-8\e$
 mail:
-    Recipients:
+    server: 208.76.16.80
+    sender: uk-disks-mon@xconnect.net
+    recipients:
         - shlomir@xconnect.net
+        - ccshlomi@gmail.com

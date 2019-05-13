@@ -1,1 +1,4 @@
-finish email
+Email
+	finish
+Compatibility
+	Loader=yaml.FullLoader parameter of yaml.load is complaining on py3.6

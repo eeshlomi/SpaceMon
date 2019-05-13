@@ -33,9 +33,11 @@ def mailMsg(stats, threshold=90):
 
 def mailer(msg, stats, mail):
     print(mail)  # debug
-    # import smtplib
-    # server=smtplib.SMTP("208.76.16.80", 25)
-    # server.sendmail("test@xconnect.net", "shlomir@xconnect.net","msg-body")
+    import smtplib
+    server = smtplib.SMTP(mail['server'], 25)
+    ''' extract a "string or bytes-like" object from stats,
+    -  only problematic disks '''
+    server.sendmail(mail['sender'], "shlomir@xconnect.net", "msg-body")
     return 0
 
 

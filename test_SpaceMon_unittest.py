@@ -1,7 +1,8 @@
 #!/usr/bin/python
 
 import unittest
-from SpaceMon import spacemon, main, parseYml, mailMsg
+from SpaceMon import spacemon, parseYml, mailMsg
+# from SpaceMon import main  # Test is currently bypassed - see below
 
 
 class TestSpaceMon(unittest.TestCase):
@@ -18,13 +19,17 @@ class TestSpaceMon(unittest.TestCase):
         equals = -1
         self.assertEqual(result, equals)
 
+    ''' disabling this because it sends mails
     def test_main(self):
         result = main({'threshold': 0,
-                       'logfile': '',
+                       'logfile': './test.log',
                        'disks': ['.'],
-                       'mail': ['']})
+                       'mail': {'server': '208.76.16.80',
+                                'sender': 'mail-tester@xconnect.net',
+                                'recipients': ['shlomir@xconnect.net']}
+                       })
         equals = 0
-        self.assertEqual(result, equals)
+        self.assertEqual(result, equals) '''
 
     def test_parseYml(self):
         result = parseYml('unittest.yml')
