@@ -24,7 +24,7 @@ def spacemon(disks=['.']):
 
 
 def mailMsg(stats, threshold=90):
-    values = [value for key, value in stats.items()]
+    values = [v for k, v in stats.items()]
     if max(values) >= threshold:
         return 'disk usage alert'
     elif min(values) == -1:
@@ -54,8 +54,8 @@ def main(cfg):
         logging.warning(stats)
         if cfg['mail']['server'] != 'None':
             problems = {k: v for k, v
-                     in stats.items()
-                     if not (-1 < v < cfg['threshold'])}
+                        in stats.items()
+                        if not (-1 < v < cfg['threshold'])}
             mailer(mSubject, problems, cfg['mail'])
     else:
         logging.info(stats)
