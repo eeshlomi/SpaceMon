@@ -2,7 +2,7 @@
 
 import unittest
 from SpaceMon import spacemon, parseYml, mailMsg
-# from SpaceMon import main  # Test is currently bypassed - see below
+# from SpaceMon import main  # Test is sometimes bypassed - see below
 
 
 class TestSpaceMon(unittest.TestCase):

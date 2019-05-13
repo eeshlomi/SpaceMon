@@ -1,5 +1,6 @@
 logfile: Null
-mailRecipients:
-    - recipient@domain.com
+mail:
+    recipients:
+        - recipient@domain.com
 disks:
     - .

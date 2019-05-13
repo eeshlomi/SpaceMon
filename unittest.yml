@@ -3,7 +3,7 @@ logfile: Null
 mail:
     server: 208.76.16.80
     sender: sender@domain.com
-    Recipients:
+    recipients:
         - recipient@domain.com
 disks:
     - .

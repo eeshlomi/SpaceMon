@@ -32,12 +32,15 @@ def mailMsg(stats, threshold=90):
 
 
 def mailer(msg, stats, mail):
-    print(mail)  # debug
     import smtplib
     server = smtplib.SMTP(mail['server'], 25)
+    rr = ''
+    for r in mail['recipients']:
+        rr += r + "; "
+    rr = rr[:len(rr)-2]
     ''' extract a "string or bytes-like" object from stats,
     -  only problematic disks '''
-    server.sendmail(mail['sender'], "shlomir@xconnect.net", "msg-body")
+    server.sendmail(mail['sender'], r, "msg-body")
     return 0
 
 
