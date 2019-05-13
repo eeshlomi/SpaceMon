@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-__version__ = '1.1'
+__version__ = '1.0'
 
 import sys
 import psutil
@@ -9,6 +9,7 @@ import psutil
 def spacemon(disks=['.']):
     stats = {}
     for disk in disks:
+        print(disk)
         try:
             diskinfo = psutil.disk_usage(disk).percent
         except OSError:  # FileNotFoundError
