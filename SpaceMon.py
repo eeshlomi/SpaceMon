@@ -54,8 +54,8 @@ def main(cfg):
         logging.warning(stats)
         if cfg['mail']['server'] != 'None':
             stats = {k: v for k, v
-                          in stats.items()
-                          if not (0 <= v <= cfg['threshold'])}
+                     in stats.items()
+                     if not (0 <= v <= cfg['threshold'])}
             mailer(mSubject, stats, cfg['mail'])
     else:
         logging.info(stats)
