@@ -1,4 +1,4 @@
 Email
-	finish
+	Nicer and filtered data to be sent
 Compatibility
 	Loader=yaml.FullLoader parameter of yaml.load is complaining on py3.6

@@ -35,7 +35,7 @@ def mailer(mSubject, stats, mail):
     if mail['server'] == 'None':
         print('Should send mail but SMTP sever is set to None')
     else:
-        mBody = 'mm'
+        mBody = str(stats)
         m = 'Subject: {}\n\n{}'.format(mSubject, mBody)
         import smtplib
         server = smtplib.SMTP(mail['server'], 25)
