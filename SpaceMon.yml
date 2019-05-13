@@ -1,4 +1,4 @@
-threshold: 10
+threshold: 40
 logfile: \\jlm-pc-shlomi\c$\temp\SpaceMon.log
 disks:
     - \\jlm-pc-shlomi\c$

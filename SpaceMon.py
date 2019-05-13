@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+__version__ = '1.0'
+
 import sys
 import psutil
 
@@ -13,7 +15,7 @@ def spacemon(disks=['.']):
             disk += '_path_not_found'
             diskinfo = -1
         except Exception:
-            print(sys.exc_info()[1])  # This should go to the log
+            # print(sys.exc_info()[1])  # DEBUG
             disk += '_unknown_error'
             diskinfo = -1
         finally:
@@ -51,6 +53,9 @@ def main(cfg):
     if mSubject:
         logging.warning(stats)
         if cfg['mail']['server'] != 'None':
+            stats = {k: v for k, v
+                          in stats.items()
+                          if not (0 <= v <= cfg['threshold'])}
             mailer(mSubject, stats, cfg['mail'])
     else:
         logging.info(stats)
