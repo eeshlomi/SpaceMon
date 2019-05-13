@@ -4,4 +4,4 @@ Compatibility
 	On Python 3.6.7 and PyYAML 3.12:
 		>>> AttributeError: module 'yaml' has no attribute 'FullLoader'
 		This attribute was introduced in PyYAML 5? and using yaml without it is being deprecated.
-	
+		Solved by (Careful!) sudo python3 -m pip install --upgrade --ignore-installed PyYAML
