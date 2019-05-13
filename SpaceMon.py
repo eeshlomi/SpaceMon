@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-__version__ = '1.0'
+__version__ = '1.1'
 
 import sys
 import psutil
@@ -33,9 +33,10 @@ def mailMsg(stats, threshold=90):
         return 0
 
 
-def mailer(mSubject, stats, mail):
-    mBody = str(stats)
-    m = 'Subject: {}\n\n{}'.format(mSubject, mBody)
+def mailer(mSubject, stats, mail, logfile):
+    mBody1 = str(stats)
+    mBody2 = 'The full log is %s' % (logfile)
+    m = 'Subject: {}\n\n{}\n{}'.format(mSubject, mBody1, mBody2)
     import smtplib
     server = smtplib.SMTP(mail['server'], 25)
     server.sendmail(mail['sender'], mail['recipients'], m)
@@ -50,13 +51,14 @@ def main(cfg):
                         datefmt='%b-%d-%y %H:%M:%S')
     stats = spacemon(cfg['disks'])
     mSubject = mailMsg(stats, cfg['threshold'])
+    # Replace Windows systems' escaped slash:
+    stats = {k.replace('\\\\', '\\'): v for k, v in stats.items()}
     if mSubject:
         logging.warning(stats)
         if cfg['mail']['server'] != 'None':
-            problems = {k: v for k, v
-                        in stats.items()
+            problems = {k: v for k, v in stats.items()
                         if not (-1 < v < cfg['threshold'])}
-            mailer(mSubject, problems, cfg['mail'])
+            mailer(mSubject, problems, cfg['mail'], cfg['logfile'])
     else:
         logging.info(stats)
     return 0
