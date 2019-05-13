@@ -32,15 +32,11 @@ def mailMsg(stats, threshold=90):
 
 
 def mailer(mSubject, stats, mail):
-    if mail['server'] == 'None':
-        print('Should send mail but SMTP sever is set to None')
-    else:
-        mBody = str(stats)
-        m = 'Subject: {}\n\n{}'.format(mSubject, mBody)
-        import smtplib
-        server = smtplib.SMTP(mail['server'], 25)
-        server.sendmail(mail['sender'], mail['recipients'], m)
-    return 0
+    mBody = str(stats)
+    m = 'Subject: {}\n\n{}'.format(mSubject, mBody)
+    import smtplib
+    server = smtplib.SMTP(mail['server'], 25)
+    server.sendmail(mail['sender'], mail['recipients'], m)
 
 
 def main(cfg):
@@ -54,7 +50,8 @@ def main(cfg):
     mSubject = mailMsg(stats, cfg['threshold'])
     if mSubject:
         logging.warning(stats)
-        mailer(mSubject, stats, cfg['mail'])
+        if cfg['mail']['server'] != 'None':
+            mailer(mSubject, stats, cfg['mail'])
     else:
         logging.info(stats)
     return 0
