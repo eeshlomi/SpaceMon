@@ -40,7 +40,8 @@ def mailer(msg, stats, mail):
     rr = rr[:len(rr)-2]
     ''' extract a "string or bytes-like" object from stats,
     -  only problematic disks '''
-    server.sendmail(mail['sender'], r, "msg-body")
+    print(rr)
+    server.sendmail(mail['sender'], rr, "msg-body")
     return 0
 
 
