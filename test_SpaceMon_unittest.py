@@ -2,7 +2,7 @@
 
 import unittest
 from SpaceMon import spacemon, parseYml, mailMsg
-# from SpaceMon import main  # Test is sometimes bypassed - see below
+from SpaceMon import main
 
 
 class TestSpaceMon(unittest.TestCase):
@@ -19,28 +19,27 @@ class TestSpaceMon(unittest.TestCase):
         equals = -1
         self.assertEqual(result, equals)
 
-    ''' disabling this because it sends mails
     def test_main(self):
         result = main({'threshold': 0,
                        'logfile': './test.log',
                        'disks': ['.'],
-                       'mail': {'server': '208.76.16.80',
+                       'mail': {'server': 'None',
                                 'sender': 'mail-tester@xconnect.net',
                                 'recipients': ['shlomir@xconnect.net']}
                        })
         equals = 0
-        self.assertEqual(result, equals) '''
+        self.assertEqual(result, equals)
 
     def test_parseYml(self):
         result = parseYml('unittest.yml')
         equals = 0
         self.assertEqual(result, equals)
 
-    ''' def test_parseYml_nopath(self):
+    def test_parseYml_nopath(self):
         # Test IOError exception:
         result = parseYml('nopath.yml')
         equals = 'config/log file access error'
-        self.assertEqual(result, equals) '''
+        self.assertEqual(result, equals)
 
     def test_parseYml_bad_yml(self):
         # Test bad format:

@@ -1,7 +1,7 @@
 threshold: 0
 logfile: Null
 mail:
-    server: 208.76.16.80
+    server: None
     sender: sender@domain.com
     recipients:
         - recipient@domain.com
