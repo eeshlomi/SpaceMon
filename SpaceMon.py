@@ -31,13 +31,15 @@ def mailMsg(stats, threshold=90):
         return 0
 
 
-def mailer(msg, stats, mail):
+def mailer(mSubject, stats, mail):
     if mail['server'] == 'None':
         print('Should send mail but SMTP sever is set to None')
     else:
+        mBody = 'mm'
+        m = 'Subject: {}\n\n{}'.format(mSubject, mBody)
         import smtplib
         server = smtplib.SMTP(mail['server'], 25)
-        server.sendmail(mail['sender'], mail['recipients'], "msg-body")
+        server.sendmail(mail['sender'], mail['recipients'], m)
     return 0
 
 
@@ -49,10 +51,10 @@ def main(cfg):
                         format='%(asctime)s - %(levelname)s - %(message)s',
                         datefmt='%b-%d-%y %H:%M:%S')
     stats = spacemon(cfg['disks'])
-    msg = mailMsg(stats, cfg['threshold'])
-    if msg:
+    mSubject = mailMsg(stats, cfg['threshold'])
+    if mSubject:
         logging.warning(stats)
-        mailer(msg, stats, cfg['mail'])
+        mailer(mSubject, stats, cfg['mail'])
     else:
         logging.info(stats)
     return 0
@@ -72,11 +74,11 @@ def parseYml(configfile='SpaceMon.yml'):
         else:
             return 'config/log file access error'
     except (TypeError, yaml.scanner.ScannerError):
-        msg = '%s is not a valid yml file'
-        return msg % (configfile)
+        mSubject = '%s is not a valid yml file'
+        return mSubject % (configfile)
     except KeyError:
-        msg = 'The key %s is missing in %s'
-        return msg % (sys.exc_info()[1], configfile)
+        mSubject = 'The key %s is missing in %s'
+        return mSubject % (sys.exc_info()[1], configfile)
 
 
 if __name__ == '__main__':
