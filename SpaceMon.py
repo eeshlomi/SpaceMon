@@ -2,7 +2,6 @@
 
 import sys
 import psutil
-import traceback  # DEBUG
 
 
 def spacemon(disks=['.']):
@@ -38,14 +37,7 @@ def mailer(msg, stats, mail):
     else:
         import smtplib
         server = smtplib.SMTP(mail['server'], 25)
-        rr = ''
-        for r in mail['recipients']:
-            rr += r + "; "
-        rr = rr[:len(rr)-2]
-        ''' extract a "string or bytes-like" object from stats,
-        -  only problematic disks '''
-        print(rr)
-        server.sendmail(mail['sender'], rr, "msg-body")
+        server.sendmail(mail['sender'], mail['recipients'], "msg-body")
     return 0
 
 
@@ -78,7 +70,6 @@ def parseYml(configfile='SpaceMon.yml'):
         elif configfile[:1] == '-':
             return 'unknown argument'
         else:
-            print(traceback.format_exc())  # DEBUG
             return 'config/log file access error'
     except (TypeError, yaml.scanner.ScannerError):
         msg = '%s is not a valid yml file'
