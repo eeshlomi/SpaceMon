@@ -1,2 +1,7 @@
 Compatibility
-	Loader=yaml.FullLoader parameter of yaml.load is complaining on py3.6
+	Tested on Python 2.7.15rc1 and PyYAML 5.1 (Ubuntu 18.04)
+	Tested on Python 3.7.? and PyYAML 5.1 (Linux@CircleCI, Win10)
+	On Python 3.6.7 and PyYAML 3.12:
+		>>> AttributeError: module 'yaml' has no attribute 'FullLoader'
+		This attribute was introduced in PyYAML 5? and using yaml without it is being deprecated.
+	
