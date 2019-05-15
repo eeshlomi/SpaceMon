@@ -1,9 +1,12 @@
+version: 1.0
 threshold: 40
+# "logfile: Null" will pipe messages to stdout
 logfile: \\jlm-pc-shlomi\c$\temp\SpaceMon.log
 disks:
     - \\jlm-pc-shlomi\c$
     - \\jlm-fs-8\e$
 mail:
+    # "server: None" will disable emails
     server: 208.76.16.80
     sender: uk-disks-mon@xconnect.net
     recipients:
